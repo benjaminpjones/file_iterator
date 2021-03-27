@@ -2,7 +2,9 @@
 #include "file_iterator.h"
 
 ////////////////// DEBUG/OTHER FUNCTIONS ////////////////
-inline bool file_exists(const string& name) {
+inline bool file_exists(const string& name) 
+    // check if file path exists
+{
     if (FILE *file = fopen(name.c_str(), "r")) {
         fclose(file);
         return true;
@@ -11,7 +13,10 @@ inline bool file_exists(const string& name) {
     }   
 }
 
-void file_iterator::print_file(){
+void file_iterator::print_file()
+    // debugging purpose
+    // just prints all lines in the two line strng vectors
+{
     for (size_t i = 0; i < line.size(); ++i){
         cout << line[i] << '\n';
     }
@@ -21,7 +26,10 @@ void file_iterator::print_file(){
     }
 }
 
-vector<string> file_iterator::data_split(const string& data){
+vector<string> file_iterator::data_split(const string& data)
+    // splits strings to extract data of the date
+    // return vector containing all the data (all in string format)
+{
     vector<string> v;
     string temp = "";
     for (size_t i = 0; i < data.size(); ++i){
@@ -36,7 +44,9 @@ vector<string> file_iterator::data_split(const string& data){
     return v;
 }
 ////////////////// MEMBER FUNCTION //////////////
-VALUE_RET file_iterator::data_curr(){
+VALUE_RET file_iterator::data_curr()
+    // returns a struct VALUE_RET that contains the data for that day
+{
     VALUE_RET ret;
     vector<string> v;
     curr_line = line[curr_line_index];
@@ -87,6 +97,9 @@ int file_iterator::get_line_index(){
 /////////////// CLASS CONSTRUCTOR ///////////////
 
 file_iterator::file_iterator(const string& f_name)
+       // first checks if file exists
+       // fill up line and reverse_line vectors
+       // also gets rid of the first line of the csv file
 {
     if (!file_exists(f_name)) {
         cerr << "File does not exist\n";
