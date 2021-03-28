@@ -24,6 +24,7 @@ class file_iterator {
         VALUE_RET data_curr();
         int get_reverse_line_index(int i);
         int get_line_index();
+        void iterate(int i);
 
         // debug
         void print_file();
